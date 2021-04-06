@@ -5,6 +5,7 @@ services:
     image: wordpress:5.5.3-php7.4-apache
     ports:
       - 8111:80
+      - 8112:81
     environment:
       - WORDPRESS_DB_HOST=mysql
       - WORDPRESS_DB_USER=root
@@ -13,6 +14,10 @@ services:
       - WORDPRESS_TABLE_PREFIX=wp
     volumes:
       - ./wp-app:/var/www/html
+      - ./wp-sub:/var/www/sub
+      - ./wp-config/000-default.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./wp-config/ports.conf:/etc/apache2/ports.conf
+      - ./wp-config/.htaccess:/var/www/sub/.htaccess
 
   mysql:
     image: mysql:5.7
